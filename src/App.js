@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { BACKEND_URL } from './enviroment';
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  const url = "https://jsonplaceholder.typicode.com/posts/";
+  const [items, setItems] = useState([]);
+  const url = BACKEND_URL + "items/" 
+  console.log(url)
 
   useEffect(() => {
     fetch(url)
@@ -15,16 +15,22 @@ function App() {
         }
         return res.json();
       })
-      .then(data => setPosts(data))
-    console.log("this is log", posts[0]?.title)
+      .then(data => setItems(data))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(items)
   return (
     <div className="App">
-      <h1>Posts</h1>
+      <h1>Items</h1>
       <h2>...are here</h2>
 
-      {posts.map(post => (
-        <div key={post.id}>{post.title}</div>
+      {items.map(item => (
+        <div key={item._id}>
+        <div>{item.BarCodeNumber}</div>
+        <div >{item.Name}</div>
+        <div >{item.Description}</div>
+        <div >{item.Response}</div>
+        </div>
       ))}
     </div>
   );
