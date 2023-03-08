@@ -29,6 +29,7 @@ const Html5QrcodePlugin = (props) => {
     const verbose = props.verbose === true;
     // Suceess callback is required.
     if (!props.qrCodeSuccessCallback) {
+      // eslint-disable-next-line no-throw-literal
       throw "qrCodeSuccessCallback is required callback.";
     }
     const html5QrcodeScanner = new Html5QrcodeScanner(
@@ -36,9 +37,17 @@ const Html5QrcodePlugin = (props) => {
       config,
       verbose
     );
+    function onScanSuccess(decodedText, decodedResult) {
+        // Handle on success condition with the decoded text or result.
+        // console.log(`Scan result: ${decodedText}`, decodedResult);
+        // ...
+        html5QrcodeScanner.clear();
+        // ^ this will stop the scanner (video feed) and clear the scan area.
+    }
     html5QrcodeScanner.render(
       props.qrCodeSuccessCallback,
-      props.qrCodeErrorCallback
+        props.qrCodeErrorCallback,
+        onScanSuccess
     );
 
     // cleanup function when component will unmount
