@@ -56,6 +56,7 @@ const Html5QrcodePlugin = (props) => {
         console.error("Failed to clear html5QrcodeScanner. ", error);
       });
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div id={qrcodeRegionId} />;

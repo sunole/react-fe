@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BACKEND_URL } from './enviroment';
 import Html5QrcodePlugin from './Html5QrcodePlugin';
 
@@ -34,7 +34,7 @@ function App() {
   const onNewScanResult = (decodedText, decodedResult) => {
     getItem(decodedText)
 
-    
+
   };
   return (
     <div className="App">
